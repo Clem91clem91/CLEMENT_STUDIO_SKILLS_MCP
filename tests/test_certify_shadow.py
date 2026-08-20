@@ -44,3 +44,17 @@ def test_certify_shadow_script_passes_against_bootstrap_hub(tmp_path: Path) -> N
     assert "MCP_UNEXPECTED=" in completed.stdout
     assert "MCP_CONTRACT=PASS" in completed.stdout
     assert "RESULT=PASS" in completed.stdout
+
+
+def test_windows_powershell_wrapper_is_ascii_only() -> None:
+    repo_root = Path(__file__).resolve().parents[1]
+    wrapper = repo_root / "scripts" / "certify_shadow.ps1"
+    raw = wrapper.read_bytes()
+
+    assert raw.isascii(), (
+        "certify_shadow.ps1 must stay ASCII-only because Windows PowerShell 5.1 "
+        "can decode UTF-8 without BOM as the active ANSI code page."
+    )
+    text = raw.decode("ascii")
+    assert "python -c" not in text.lower()
+    assert "certify_shadow.py" in text
