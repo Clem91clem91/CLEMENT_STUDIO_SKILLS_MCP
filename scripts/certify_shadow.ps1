@@ -8,7 +8,7 @@ $Python = Join-Path $Repo ".venv\Scripts\python.exe"
 $Certifier = Join-Path $PSScriptRoot "certify_shadow.py"
 
 Write-Host "============================================================"
-Write-Host "CLEMENT — P0-02 SHADOW CERTIFICATION"
+Write-Host "CLEMENT - P0-02 SHADOW CERTIFICATION"
 Write-Host "MODE=REPOSITORY_SCRIPT"
 Write-Host "============================================================"
 
