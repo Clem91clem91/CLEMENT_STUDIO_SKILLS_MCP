@@ -55,6 +55,7 @@ def test_windows_powershell_wrapper_is_ascii_only() -> None:
         "certify_shadow.ps1 must stay ASCII-only because Windows PowerShell 5.1 "
         "can decode UTF-8 without BOM as the active ANSI code page."
     )
-    text = raw.decode("ascii")
-    assert "python -c" not in text.lower()
+    text = raw.decode("ascii").lower()
+    assert '-c @"' not in text
+    assert "-c @'" not in text
     assert "certify_shadow.py" in text
